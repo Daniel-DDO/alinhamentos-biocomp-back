@@ -1,5 +1,6 @@
 package br.ufrpe.biocomp.controller;
 
+import br.ufrpe.biocomp.model.ResultadoMsaDTO;
 import br.ufrpe.biocomp.model.Sequencia;
 import br.ufrpe.biocomp.service.MsaService;
 import br.ufrpe.biocomp.util.FastaParser;
@@ -37,7 +38,7 @@ public class MsaController {
                 return ResponseEntity.badRequest().body("Erro de validação. O texto FASTA é inválido");
             }
 
-            Map<String, String> resultado = msaService.alinhamentoMultiploSequencias(sequencias);
+            ResultadoMsaDTO resultado = msaService.alinhamentoMultiploSequencias(sequencias);
             return ResponseEntity.ok(resultado);
         }catch(IllegalArgumentException e){
             e.printStackTrace();

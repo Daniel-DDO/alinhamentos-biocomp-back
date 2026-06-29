@@ -1,11 +1,9 @@
 package br.ufrpe.biocomp.service;
 
-import br.ufrpe.biocomp.model.Alinhamento;
-import br.ufrpe.biocomp.model.MatrizDistancia;
-import br.ufrpe.biocomp.model.NoFilogenetico;
-import br.ufrpe.biocomp.model.Sequencia;
+import br.ufrpe.biocomp.model.*;
 import org.springframework.stereotype.Service;
 
+import javax.xml.transform.Result;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +23,7 @@ public class MsaService {
 
     }
 
-    public Map<String, String> alinhamentoMultiploSequencias(List<Sequencia> sequencias){
+    public ResultadoMsaDTO alinhamentoMultiploSequencias(List<Sequencia> sequencias){
         if(sequencias == null || sequencias.isEmpty() || sequencias.size() < 2){
             throw new IllegalArgumentException("É necessário pelo menos 2 sequencias.");
         }
@@ -50,9 +48,11 @@ public class MsaService {
             String sequenciaGaps = alinhamentoFinal.get(i);
             resultado.put(identificador, sequenciaGaps);
         }
+        String arvore = raiz.formatadoNewick() + ";";
 
         System.out.println("[SUCESSO] alinhamento múltiplo concluido com sucesso.");
-        return resultado;
+        System.out.println("Ávore gerada: " + arvore);
+        return new ResultadoMsaDTO(arvore, resultado);
 
     }
 }
