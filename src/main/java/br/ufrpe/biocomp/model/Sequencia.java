@@ -8,4 +8,9 @@ public class Sequencia {
     private String fasta;
     private String conteudo;
 
+    public Sequencia(String idAtual, String fastaCompleto, String conteudoStr) {
+        this.id = idAtual;
+        this.fasta = fastaCompleto;
+        this.conteudo = conteudoStr;
+    }
 }

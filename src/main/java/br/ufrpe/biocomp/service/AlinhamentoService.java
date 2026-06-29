@@ -10,6 +10,11 @@ public class AlinhamentoService {
     private static final int match = 1;
     private static final int mismatch = -1;
 
+    /**
+     * Executa o alinhamento genético entre 2 sequencias.
+     * @param Sequencia S1 e Sequencia S2.
+     * @return Alinhamento com o Score e sequencias utilizadas.
+     */
     public Alinhamento NeedlemanWunsch(Sequencia  S1, Sequencia S2) {
 
         // Variáveis auxiliares
