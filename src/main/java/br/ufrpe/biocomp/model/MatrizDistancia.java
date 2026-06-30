@@ -9,10 +9,10 @@ import java.util.List;
 public class MatrizDistancia {
     private List<NoFilogenetico> nosAtivos;
 
-    private Double[][] matriz;
+    private double[][] matriz;
 
-    public MatrizDistancia(List<NoFilogenetico> nosIniciais, Double matrizInicial[][]) {
-        this.nosAtivos = new ArrayList<NoFilogenetico>();
+    public MatrizDistancia(List<NoFilogenetico> nosIniciais, double matrizInicial[][]) {
+        this.nosAtivos = nosIniciais;
         this.matriz = matrizInicial;
 
     }

@@ -1,8 +1,14 @@
 package br.ufrpe.biocomp.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+@Getter
+@Setter
 public class NoFilogenetico {
     private String nome;
     private List<Sequencia> sequencias;
@@ -22,7 +28,7 @@ public class NoFilogenetico {
     // Construtor para um nó interno do upgma
     public NoFilogenetico(String nome, NoFilogenetico filhoEsquerdo, NoFilogenetico filhoDireito, double altura) {
         this.nome = nome;
-        this.altura = 0.0;
+        this.altura = altura;
         this.filhoEsquerdo = filhoEsquerdo;
         this.filhoDireito = filhoDireito;
 
@@ -36,5 +42,21 @@ public class NoFilogenetico {
         return this.filhoEsquerdo == null && this.filhoDireito == null;
     }
 
+    public String formatadoNewick(){
+        if(isFolha()){
+            return this.nome;
+        }
+        else{
+            String esquerdo = filhoEsquerdo.formatadoNewick();
+            String direito = filhoDireito.formatadoNewick();
 
+            double distanciaEsquerdo = this.altura - this.filhoEsquerdo.getAltura();
+            double distanciaDireito = this.altura - this.filhoDireito.getAltura();
+
+            return String.format(Locale.US, "(%s:%.3f,%s:%.3f)%s",
+                    esquerdo, distanciaEsquerdo,
+                    direito, distanciaDireito,
+                    this.nome);
+        }
+    }
 }
